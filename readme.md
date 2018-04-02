@@ -30,9 +30,10 @@ You can test the bot from the commandline using `npm run start`
 ## Deployment on AWS
 
 We need to create:
-- An S3 bucket for storage purpose (You can implement another backed if you want)
+- An S3 bucket for storage purpose (You can implement another backend if you want)
 - A Lambda function with S3 permissions.
 - An AWS API
+- Set a Telegram Webhook
 
 
 ### Create a new Bucket
@@ -103,7 +104,7 @@ we have to configure the lambda context to receive the "Telegram API Key" as a t
 ```
 
 
-### Set a Telegram Webhook
+#### Set a Telegram Webhook
 You must define a Telegram webhook to receive messages.
 You can create a bot and obtain an API key from The Bot father <https://t.me/BotFather>
 
