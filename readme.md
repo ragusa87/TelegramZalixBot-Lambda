@@ -35,16 +35,16 @@ We need to create:
 - An AWS API
 
 
-## Create a new Bucket
+### Create a new Bucket
 - Name it ZalixBot-<something>.
 
-## Create a new Lambda Function
+### Create a new Lambda Function
 - Create a new Lambda function from scratch named *ZalixBot*
 - Select "create a Role from Template" and choose "S3 Object ReadOnly permission". We will edit this later.
 - Add an environment variable on your Lambda function named `bucket` and type your bucket name.
 - Update your Lamba function with the script `./build.sh` (you should have AWS-Cli or you can upload a zip instead).
 
-## Create a new API Gateway
+### Create a new API Gateway
 The endpoint with execute the Lambda function.
 As we want to handle multiple bot instances with the same deployment,
 we have to configure the lambda context to receive the "Telegram API Key" as a token from the URL.
@@ -82,7 +82,7 @@ we have to configure the lambda context to receive the "Telegram API Key" as a t
 ```
 7. Deploy your API (and create a new stage *prod* if needed)
 
-### Add S3 access to your lambda function
+#### Add S3 access to your lambda function
 - Under Lambda, click on your function and on the S3 icon. Then copy the Lambda Execution Role ARN.
 - Under IAM, edit your role policy to add read and write access only to your bucket with the policy below. Be sure to replace <bucketName> with your bucket's name
 ```yml
@@ -112,7 +112,10 @@ To set a webhook use something like this:
 > curl -F "url=https://%domain%/%apikey%" https://api.telegram.org/bot%apikey%/setWebhook
 
 Your domain is the AWS API Endpoint, you can define something else using an API Custom domain name.
-Example: <https://prod.zabixbot.example.com/YOUR-API-KEY-TOKEN> or <randomtoken.execute-api.eu-central-1.amazonaws.com/prod/YOUR-API-KEY-TOKEN>
+
+Examples:
+
+<https://prod.zabixbot.example.com/YOUR-API-KEY-TOKEN> or <randomtoken.execute-api.eu-central-1.amazonaws.com/prod/YOUR-API-KEY-TOKEN>
 
 ## Licence
 MIT
