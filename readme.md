@@ -112,10 +112,11 @@ To set a webhook use something like this:
 > curl -F "url=https://%domain%/%apikey%" https://api.telegram.org/bot%apikey%/setWebhook
 
 Your domain is the AWS API Endpoint, you can define something else using an API Custom domain name.
+You must use HTTPS.
 
 Examples:
 
-<https://prod.zabixbot.example.com/YOUR-API-KEY-TOKEN> or <randomtoken.execute-api.eu-central-1.amazonaws.com/prod/YOUR-API-KEY-TOKEN>
+<https://prod.zabixbot.example.com/YOUR-API-KEY-TOKEN> or <https://randomtoken.execute-api.eu-central-1.amazonaws.com/prod/YOUR-API-KEY-TOKEN>
 
 ## Licence
 MIT
