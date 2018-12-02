@@ -1,5 +1,5 @@
 # Telegram Fake Bot
- 
+
 This is used as an experiment.
 
 This bot will proxy all messages to an administrator and when the administrator answers, it will be send back to the last user.
@@ -9,11 +9,11 @@ To be administrator:
  > /admin `Ymd`
 
 To be a guest:
- 
+
  > /start.
 
 To leave as guest or administrator:
- 
+
  > /stop
 
 
@@ -50,6 +50,17 @@ The endpoint with execute the Lambda function.
 As we want to handle multiple bot instances with the same deployment,
 we have to configure the lambda context to receive the "Telegram API Key" as a token from the URL.
 
+You can choose two methods, manualy or by importing a configuration file.
+
+#### Import a configuration file (untested)
+You can open the file `ZalixBot-production-apigateway-sample.yaml` and import it into AWS as an "OpenAPI 3 + Gateway Extension" file.
+Be sure to replace the following tokens before the importation:
+ * CUSTOM_BOT_URL
+ * CUSTOM_LAMBDA_ARN
+
+#### Manualy
+You can do all this manualy with the following steps:
+
 1. Create a new AWS API Gateway named *ZalixBot*
 2. On the API, create a new resource `/{token}`
 3. Create a new POST method for the resource and set your lambda function.
@@ -81,7 +92,8 @@ we have to configure the lambda context to receive the "Telegram API Key" as a t
 }
 
 ```
-7. Deploy your API (and create a new stage *prod* if needed)
+7. (optional) Do the same for a new POST resource under `/{token}/notify-admin`
+8. Deploy your API (and create a new stage *prod* if needed)
 
 #### Add S3 access to your lambda function
 - Under Lambda, click on your function and on the S3 icon. Then copy the Lambda Execution Role ARN.
@@ -118,6 +130,14 @@ You must use HTTPS.
 Examples:
 
 <https://prod.zabixbot.example.com/YOUR-API-KEY-TOKEN> or <https://randomtoken.execute-api.eu-central-1.amazonaws.com/prod/YOUR-API-KEY-TOKEN>
+
+### Send message from your script to the chat's administrator
+
+Use the code below:
+```bash
+
+curl -X POST -H "Content-Type: application/j -d '{"notify":"MESSAGE"}' https://prod.zabixbot.example.com/YOUR-API-KEY-TOKEN/notify-admin
+```
 
 ## Licence
 MIT
