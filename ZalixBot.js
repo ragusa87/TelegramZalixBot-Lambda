@@ -49,7 +49,7 @@ class ZalixBot {
     onNotifyAdmin(message){
         return this.persister.load().then(() => {
             let adminId = this.persister.getAdminId();
-            if (!adminId <= 0){
+            if (adminId <= 0){
                 throw new Error("No Admin yet")
             }
             if (!message){
