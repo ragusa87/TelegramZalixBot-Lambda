@@ -136,7 +136,7 @@ Examples:
 Use the code below:
 ```bash
 
-curl -X POST -H "Content-Type: application/j -d '{"notify":"MESSAGE"}' https://prod.zabixbot.example.com/YOUR-API-KEY-TOKEN/notify-admin
+curl -X POST -H "Content-Type: application/json" -d '{"notify":"MESSAGE"}' https://prod.zabixbot.example.com/YOUR-API-KEY-TOKEN/notify-admin
 ```
 
 ## Licence
