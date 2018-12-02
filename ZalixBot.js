@@ -46,8 +46,19 @@ class ZalixBot {
             return typeof data.result !== "undefined" ? data.result : null;
         });
     }
-
-    onMessage(message) {
+    onNotifyAdmin(message){
+        return this.persister.load().then(() => {
+            let adminId = this.persister.getAdminId();
+            if (adminId <= 0){
+                throw new Error("No Admin yet")
+            }
+            if (!message){
+                throw new Error("Message is empty")
+            }
+            this.messagePromise(adminId, message)
+        });
+   }
+   onMessage(message) {
         if (!message.text || message.text.trim() === "") {
             return this.messagePromise(message.chat.id, "Vous devez saisir du texte uniquement");
         }
